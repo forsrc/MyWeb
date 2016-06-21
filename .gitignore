@@ -1,0 +1,15 @@
+*.class
+
+# Package Files #
+*.war
+*.ear
+.DS_Store
+/WebRoot/WEB-INF/classes
+/bin
+out
+.idea
+/.idea
+/.idea/workspace.xml
+.myeclipse
+/.myeclipse
+*.log

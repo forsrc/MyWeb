@@ -54,18 +54,18 @@ $(document).ready(function() {
                     console.log(value.status);
                     if (value.status === 'New') {
 
-                        nodeA = nodeA + '<tr id="' + value.id +'">\<td class="leadonClick">'
-                            + newPhone + '</td>\<td class="leadnoClick">'
-                            + value.name + '</td>\<td class="leadnoClick">'
-                            + value.status + '</td>\<td class="leadnoClick">'
-                            +　value.project_name +'</td>\</tr>';
+                        nodeA = nodeA + '<tr id="' + value.id +'"><td class="leadonClick">'
+                            + newPhone + '</td><td class="leadnoClick">'
+                            + value.name + '</td><td class="leadnoClick">'
+                            + value.status + '</td><td class="leadnoClick">'
+                            +　value.project_name +'</td></tr>';
 
                     } else if (value.status === 'Follow Up') {
-                        nodeB = nodeB + '<tr id="' + value.id + '">\<td class="leadonClick">'
-                            +　newPhone + '</td>\<td class="leadnoClick">'
-                            +　value.name +　'</td>\<td class="leadnoClick">'
-                            +　value.status +　'</td>\<td class="leadnoClick">'
-                            +　value.project_name +　'</td>\</tr>';
+                        nodeB = nodeB + '<tr id="' + value.id + '"><td class="leadonClick">'
+                            +　newPhone + '</td><td class="leadnoClick">'
+                            +　value.name +　'</td><td class="leadnoClick">'
+                            +　value.status +　'</td><td class="leadnoClick">'
+                            +　value.project_name +　'</td></tr>';
 
                     }
                     //console.log(node);
@@ -109,7 +109,7 @@ $(document).ready(function() {
             var id = $(this).parent().attr("id");
             //alert(id);
             if (id != null) {
-                window.location.href = "leadDetail.html?id=" + id;
+                window.location.href = "../web/leadDetail.html?id=" + id;
                 var activeTab = $(this).closest('.tab-pane').attr("id");
                 sessionStorage.activeTab = activeTab;
                 sessionStorage.leadId = id;

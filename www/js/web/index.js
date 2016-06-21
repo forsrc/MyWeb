@@ -32,30 +32,23 @@ $(document).ready(function() {
                 },
                 success: function(response) {
                     console.log(response);
-                    if (response.username !=
-                        username) { //TODO
+                    if (response.username != username) { //TODO
                         $("span.error").fadeIn();
                         return;
                     }
                     //var response = JSON.parse(response);
-                    if (response.id != 0 &&
-                        response.code == 200) {
-                        sessionStorage.sessionId =
-                            response.id;
-                        sessionStorage.username =
-                            username;
+                    if (response.id != 0 && response.code == 200) {
+                        sessionStorage.sessionId = response.id;
+                        sessionStorage.username = username;
                         console.log(sessionStorage.sessionId);
-                        window.location.href =
-                            "../web/activity.html";
+                        window.location.href = "../web/activity.html";
                         return;
                     }
                     $("span.error").fadeIn();
                     //window.location.href = "../web/activity.html";
                 },
-                error: function(jqXHR, textStatus,
-                    errorThrown) {
-                    console.log(textStatus,
-                        errorThrown);
+                error: function(jqXHR, textStatus, errorThrown) {
+                    console.log(textStatus, errorThrown);
                     $("#fail").snackbar("show");
                 }
             });

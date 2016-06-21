@@ -70,89 +70,52 @@ $(document).ready(function() {
                 $.each(response.project,
                     function(index, value) {
                         $('#project').append(
-                            $(
-                                '<option/>', {
-                                    value: response
-                                        .project[
-                                            index
-                                        ]
-                                        .project_name,
-                                    text: response
-                                        .project[
-                                            index
-                                        ]
-                                        .project_name,
-                                }));
+                            $('<option/>', {
+                                value: response.project[index].project_name,
+                                text: response.project[index].project_name,
+                            }));
                     });
-                if (response['0'].project_name !=
-                    null)
-                    $('#project').val(response[
-                        '0'].project_name).trigger(
-                        "change");
+                if (response['0'].project_name != null) {
+                    $('#project').val(response['0'].project_name).trigger("change");
+                }
 
                 $.each(response.status,
                     function(index, value) {
                         $('#status').append(
                             $(
                                 '<option/>', {
-                                    value: response
-                                        .status[
-                                            index
-                                        ],
-                                    text: response
-                                        .status[
-                                            index
-                                        ],
+                                    value: response.status[index],
+                                    text: response.status[index],
                                 }));
                     });
 
-                if (response['0'].status !=
-                    null)
-                    $("#status").val(response[
-                        '0'].status).trigger(
-                        "change");
+                if (response['0'].status != null) {
+                    $("#status").val(response['0'].status).trigger("change");
+                }
 
                 $.each(response.lead_source,
                     function(index, value) {
                         $('#agent').append(
-                            $(
-                                '<option/>', {
-                                    value: response
-                                        .lead_source[
-                                            index
-                                        ],
-                                    text: response
-                                        .lead_source[
-                                            index
-                                        ],
-                                }));
+                            $('<option/>', {
+                                value: response.lead_source[index],
+                                text: response.lead_source[index],
+                            }));
                     });
-                if (response['0'].lead_source !=
-                    null)
-                    $('#agent').val(response[
-                        '0'].lead_source).trigger(
-                        "change");
+                if (response['0'].lead_source != null) {
+                    $('#agent').val(response['0'].lead_source).trigger("change");
+                }
 
                 $.each(response.rating,
                     function(index, value) {
                         $('#rating').append(
-                            $(
-                                '<option/>', {
-                                    value: response
-                                        .rating[
-                                            index
-                                        ],
-                                    text: response
-                                        .rating[
-                                            index
-                                        ],
-                                }));
+                            $('<option/>', {
+                                value: response.rating[index],
+                                text: response.rating[index],
+                            }));
                     });
-                if (response['0'].rating !=
-                    null)
-                    $('#rating').val(response[
-                        '0'].rating).trigger(
-                        "change");
+                if (response['0'].rating != null) {
+                    $('#rating').val(response['0'].rating).trigger("change");
+                }
 
                 var date = new Date();
                 currentDate = date.getDate(); // Get current date
@@ -162,38 +125,26 @@ $(document).ready(function() {
                 hour = currentTime.getHours();
                 min = currentTime.getMinutes();
                 sec = 00;
-                dStartD = new Date(year, month,
-                    currentDate, hour, min,
-                    sec);
-                if (response['0'].follow_up_date !=
-                    null) {
+                dStartD = new Date(year, month, currentDate, hour, min, sec);
+                if (response['0'].follow_up_date != null) {
 
                     var date = response['0'].follow_up_date;
                     var yy = date.substr(0, 4);
-                    var mm = parseInt(date.substr(
-                        5, 2)) - 1;
+                    var mm = parseInt(date.substr(5, 2)) - 1;
                     var dd = date.substr(8, 2);
                     var h = date.substr(11, 2);
                     var m = date.substr(14, 2);
                     var s = date.substr(17, 2);
 
-                    var newDate = new Date(yy,
-                        mm, dd, h, m, s);
+                    var newDate = new Date(yy, mm, dd, h, m, s);
                     $("#fupdate").AnyPicker({
                         mode: "datetime",
-
                         showComponentLabel: true,
-
                         dateTimeFormat: "yyyy-MM-dd HH:mm:ss",
                         onInit: function() {
-                            oAP1 =
-                                this;
-                            oAP1.setSelectedDate(
-                                newDate
-                            );
-                            oAP1.setMinimumDate(
-                                dStartD
-                            );
+                            oAP1 = this;
+                            oAP1.setSelectedDate(newDate);
+                            oAP1.setMinimumDate(dStartD);
                         }
                     });
                 } else {
@@ -204,11 +155,8 @@ $(document).ready(function() {
 
                         dateTimeFormat: "yyyy-MM-dd HH:mm:ss",
                         onInit: function() {
-                            oAP1 =
-                                this;
-                            oAP1.setMinimumDate(
-                                dStartD
-                            );
+                            oAP1 = this;
+                            oAP1.setMinimumDate(dStartD);
                         }
                     });
                 }
@@ -216,29 +164,20 @@ $(document).ready(function() {
                     null) {
                     var date = response['0'].sitevisit_date;
                     var yy = date.substr(0, 4);
-                    var mm = parseInt(date.substr(
-                        5, 2));
+                    var mm = parseInt(date.substr(5, 2));
                     var dd = date.substr(8, 2);
                     var h = date.substr(11, 2);
                     var m = date.substr(14, 2);
                     var s = date.substr(17, 2);
-                    var newDate = new Date(yy,
-                        mm, dd, h, m, s);
+                    var newDate = new Date(yy, mm, dd, h, m, s);
                     $("#svdate").AnyPicker({
                         mode: "datetime",
-
                         showComponentLabel: true,
-
                         dateTimeFormat: "yyyy-MM-dd HH:mm:ss",
                         onInit: function() {
-                            oAP1 =
-                                this;
-                            oAP1.setSelectedDate(
-                                newDate
-                            );
-                            oAP1.setMinimumDate(
-                                dStartD
-                            );
+                            oAP1 = this;
+                            oAP1.setSelectedDate(newDate);
+                            oAP1.setMinimumDate(dStartD);
                         }
                     });
                 } else {
@@ -249,22 +188,16 @@ $(document).ready(function() {
 
                         dateTimeFormat: "yyyy-MM-dd HH:mm:ss",
                         onInit: function() {
-                            oAP1 =
-                                this;
-                            oAP1.setMinimumDate(
-                                dStartD
-                            );
+                            oAP1 = this;
+                            oAP1.setMinimumDate(dStartD);
                         }
                     });
                 }
 
-                $("#sdetail").val(response['0']
-                    .lead_source_detail);
+                $("#sdetail").val(response['0'].lead_source_detail);
                 $.each(response.activity_log,
                     function(key, value) {
-                        var excerpt = value
-                            .description.substr(
-                                0, 59);
+                        var excerpt = value.description.substr(0, 59);
                         node =
                             '<div class="list-group-item">\
                                     <div class="row-action-primary">\
@@ -291,8 +224,7 @@ $(document).ready(function() {
 
                     });
             });
-            $('.detailTabs a[href="#leadDetails"]').tab(
-                'show');
+            $('.detailTabs a[href="#leadDetails"]').tab('show');
 
         },
         error: function(jqXHR, textStatus, errorThrown) {
@@ -303,22 +235,16 @@ $(document).ready(function() {
     $(document).on('click',
         '#detailContent #activityLogs .list-group .list-group-item',
         function() {
-            if ($(this).children().children('p.excerpt').hasClass(
-                    'hidden')) {
-                $(this).children().children('p.full-text').addClass(
-                    'hidden');
-                $(this).children().children('p.excerpt').removeClass(
-                    'hidden');
+            if ($(this).children().children('p.excerpt').hasClass('hidden')) {
+                $(this).children().children('p.full-text').addClass('hidden');
+                $(this).children().children('p.excerpt').removeClass('hidden');
             } else {
-                $(this).children().children('p.excerpt').addClass(
-                    'hidden');
-                $(this).children().children('p.full-text').removeClass(
-                    'hidden');
+                $(this).children().children('p.excerpt').addClass('hidden');
+                $(this).children().children('p.full-text').removeClass('hidden');
             }
         });
     $(".save").click(function() {
-        if ($("#email").parent(".form-group").hasClass(
-                "has-error")) {
+        if ($("#email").parent(".form-group").hasClass("has-error")) {
             var content =
                 "<i class='material-icons wrong'>close</i>&nbsp;&nbsp;Please provide correct EmailId!";
             $("#error").attr("data-content", content);
@@ -353,28 +279,22 @@ $(document).ready(function() {
                 );
             },
             success: function(response) {
-                var response = JSON.parse(
-                    response);
+                var response = JSON.parse(response);
                 //alert(response.status);
                 if (response.status !=
                     'Success') {
                     var content =
                         "<i class='material-icons wrong'>close</i>&nbsp;&nbsp;" +
                         response.status;
-                    $("#error").attr(
-                        "data-content",
-                        content);
+                    $("#error").attr("data-content", content);
                     $("#error").snackbar("show");
                 } else {
-                    $("#success").snackbar(
-                        "show");
+                    $("#success").snackbar("show");
                     setTimeout(function() {
                         location.reload();
                     }, 1000);
                 }
-                $(
-                    ".table.detailTable tbody .save"
-                ).html("Save");
+                $(".table.detailTable tbody .save").html("Save");
 
             },
             error: function(jqXHR, textStatus,
@@ -382,9 +302,7 @@ $(document).ready(function() {
                 console.log(textStatus,
                     errorThrown);
                 $("#fail").snackbar("show");
-                $(
-                    ".table.detailTable tbody .save"
-                ).html("Save");
+                $(".table.detailTable tbody .save").html("Save");
             }
 
         });

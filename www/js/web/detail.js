@@ -29,7 +29,7 @@ $(document).ready(function () {
         window.open(phone, '_system');
     });
     $.ajax({
-        type: 'POST',
+        type: 'GET',
         url: MY_WEB_URL.detailJson + "?" + sessionStorage.sessionId + '&id=' + id + '&user_name=' + sessionStorage.username,
         dataType: 'json',
         beforeSend: function () {

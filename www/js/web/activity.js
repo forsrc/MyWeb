@@ -1,7 +1,7 @@
 $(document).ready(function() {
     if (!sessionStorage.sessionId) {
-        window.location.href = "../web/index.html";
-        retrun;
+        window.location.href = MY_WEB_URL.login;
+        return;
     }
     //alert(sessionStorage.username);
     $("#username").text(sessionStorage.username);
@@ -23,14 +23,14 @@ $(document).ready(function() {
     $("#logout").click(function() {
 
         sessionStorage.clear();
-        window.location.href = "../web/index.html";
+        window.location.href = MY_WEB_URL.login;
     });
 
 
     $(".reload").attr("href", window.location.href);
     $.ajax({
         type: 'GET',
-        url: MY_WEB_URL.listView + '?id=' + sessionStorage.sessionId + '&user_name=' +
+        url: MY_WEB_URL.listViewJson + '?id=' + sessionStorage.sessionId + '&user_name=' +
             sessionStorage.username,
         dataType: 'json',
         beforeSend: function() {
@@ -109,7 +109,7 @@ $(document).ready(function() {
             var id = $(this).parent().attr("id");
             //alert(id);
             if (id != null) {
-                window.location.href = "../web/leadDetail.html?id=" + id;
+                window.location.href = MY_WEB_URL.detail + "?id=" + id;
                 var activeTab = $(this).closest('.tab-pane').attr("id");
                 sessionStorage.activeTab = activeTab;
                 sessionStorage.leadId = id;

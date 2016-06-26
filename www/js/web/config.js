@@ -1,9 +1,11 @@
-
+var SERVER = "http://192.168.11.8:3000";
 var MY_WEB_URL = {
-    "login" : "http://192.168.11.8:3000/json/login.json",
-    "listView" : "http://192.168.11.8:3000/json/appListView.json",
-    "index" : "../web/index.html",
+    "loginJson" : SERVER + "/MyStudy/www/json/login.json",
+    "listViewJson" : SERVER + "/MyStudy/www/json/appListView.json",
+    "detailJson" : SERVER + "/MyStudy/www/json/detail.json",
+    "login" : "../web/login.html",
     "activity" : "../web/activity.html",
-    "secarch" : "../web/activity.html",
-    "detail" : "../web/loadDetail.html"
+    "search" : "../web/search.html",
+    "detail" : "../web/detail.html",
+    "index": "./web/login.html"
 };

@@ -1,45 +1,45 @@
-$(document).ready(function() {
+$(document).ready(function () {
     if (!sessionStorage.sessionId) {
-        window.location.href = "../web/index.html";
-        retrun;
+        window.location.href = MY_WEB_URL.login;
+        return;
     }
 
     app.initialize();
     $.material.init();
     $.material.ripples();
-    $(".logout").click(function() {
+    $(".logout").click(function () {
 
         sessionStorage.clear();
-        window.location.href = "../web/index.html";
-    })
+        window.location.href = MY_WEB_URL.login;
+    });
     $("select").dropdown({
         autoinit: "select"
     });
     var url = window.location.href;
     var id = url.substring(url.indexOf('?id=') + 4);
     var pid = '';
-    $('input').keypress(function(e) {
+    $('input').keypress(function (e) {
         var code = (e.keyCode ? e.keyCode : e.which);
         if ((code == 13) || (code == 10)) {
             $(".save").click();
         }
     });
-    $(".btn.reload").click(function() {
+    $(".btn.reload").click(function () {
         var phone = $(this).attr("href");
         window.open(phone, '_system');
     });
     $.ajax({
         type: 'POST',
-        url: 'http://crm.primehomes.com/index.php?entryPoint=editViewApp&session_id=' + sessionStorage.sessionId + '&id=' + id + '&user_name=' + sessionStorage.username,
+        url: MY_WEB_URL.detailJson + "?" + sessionStorage.sessionId + '&id=' + id + '&user_name=' + sessionStorage.username,
         dataType: 'json',
-        beforeSend: function() {
+        beforeSend: function () {
             $(".loader").fadeIn("fast");
         },
-        success: function(response) {
-            var response = $.parseJSON(JSON.stringify(response));
-            console.log(JSON.stringify(response));
+        success: function (response) {
+            //var response = $.parseJSON(JSON.stringify(response));
+            //console.log(JSON.stringify(response));
 
-            $(".loader").fadeOut("slow", function() {
+            $(".loader").fadeOut("slow", function () {
 
                 $(".detailTable tbody").css("display", "table-row-group");
                 pid = response['0'].project_id;
@@ -55,7 +55,7 @@ $(document).ready(function() {
                 if (response['0'].email != null)
                     $("#email").val(response[0].email);
 
-                $.each(response.project, function(index, value) {
+                $.each(response.project, function (index, value) {
                     $('#project').append($('<option/>', {
                         value: response.project[index].project_name,
                         text: response.project[index].project_name,
@@ -64,29 +64,29 @@ $(document).ready(function() {
                 if (response['0'].project_name != null)
                     $('#project').val(response['0'].project_name).trigger("change");
 
-                $.each(response.status, function(index, value) {
+                $.each(response.status, function (index, value) {
                     $('#status').append($('<option/>', {
                         value: response.status[index],
-                        text: response.status[index],
+                        text: response.status[index]
                     }));
                 });
 
                 if (response['0'].status != null)
                     $("#status").val(response['0'].status).trigger("change");
 
-                $.each(response.lead_source, function(index, value) {
+                $.each(response.lead_source, function (index, value) {
                     $('#agent').append($('<option/>', {
                         value: response.lead_source[index],
-                        text: response.lead_source[index],
+                        text: response.lead_source[index]
                     }));
                 });
                 if (response['0'].lead_source != null)
                     $('#agent').val(response['0'].lead_source).trigger("change");
 
-                $.each(response.rating, function(index, value) {
+                $.each(response.rating, function (index, value) {
                     $('#rating').append($('<option/>', {
                         value: response.rating[index],
-                        text: response.rating[index],
+                        text: response.rating[index]
                     }));
                 });
                 if (response['0'].rating != null)
@@ -118,7 +118,7 @@ $(document).ready(function() {
                         showComponentLabel: true,
 
                         dateTimeFormat: "yyyy-MM-dd HH:mm:ss",
-                        onInit: function() {
+                        onInit: function () {
                             oAP1 = this;
                             oAP1.setSelectedDate(newDate);
                             oAP1.setMinimumDate(dStartD);
@@ -131,7 +131,7 @@ $(document).ready(function() {
                         showComponentLabel: true,
 
                         dateTimeFormat: "yyyy-MM-dd HH:mm:ss",
-                        onInit: function() {
+                        onInit: function () {
                             oAP1 = this;
                             oAP1.setMinimumDate(dStartD);
                         }
@@ -152,7 +152,7 @@ $(document).ready(function() {
                         showComponentLabel: true,
 
                         dateTimeFormat: "yyyy-MM-dd HH:mm:ss",
-                        onInit: function() {
+                        onInit: function () {
                             oAP1 = this;
                             oAP1.setSelectedDate(newDate);
                             oAP1.setMinimumDate(dStartD);
@@ -165,7 +165,7 @@ $(document).ready(function() {
                         showComponentLabel: true,
 
                         dateTimeFormat: "yyyy-MM-dd HH:mm:ss",
-                        onInit: function() {
+                        onInit: function () {
                             oAP1 = this;
                             oAP1.setMinimumDate(dStartD);
                         }
@@ -173,7 +173,7 @@ $(document).ready(function() {
                 }
 
                 $("#sdetail").val(response['0'].lead_source_detail);
-                $.each(response.activity_log, function(key, value) {
+                $.each(response.activity_log, function (key, value) {
                     var excerpt = value.description.substr(0, 59);
                     node =
                         '<div class="list-group-item">\
@@ -186,7 +186,7 @@ $(document).ready(function() {
                                         <p class="list-group-item-text excerpt">' + excerpt +
                         '<strong>&nbsp;&nbsp;[...]</strong></p>\
                                         <p class="list-group-item-text full-text hidden">' + value
-                        .description + '</p>\
+                            .description + '</p>\
                                 </div>\
                                 <div class="list-group-separator"></div>';
 
@@ -198,12 +198,12 @@ $(document).ready(function() {
             $('.detailTabs a[href="#leadDetails"]').tab('show');
 
         },
-        error: function(jqXHR, textStatus, errorThrown) {
+        error: function (jqXHR, textStatus, errorThrown) {
             console.log(textStatus, errorThrown);
             $("#fail").snackbar("show");
         }
     });
-    $(document).on('click', '#detailContent #activityLogs .list-group .list-group-item', function() {
+    $(document).on('click', '#detailContent #activityLogs .list-group .list-group-item', function () {
         if ($(this).children().children('p.excerpt').hasClass('hidden')) {
             $(this).children().children('p.full-text').addClass('hidden');
             $(this).children().children('p.excerpt').removeClass('hidden');
@@ -212,26 +212,35 @@ $(document).ready(function() {
             $(this).children().children('p.full-text').removeClass('hidden');
         }
     });
-    $(".save").click(function() {
+    $(".save").click(function () {
         if ($("#email").parent(".form-group").hasClass("has-error")) {
             var content = "<i class='material-icons wrong'>close</i>&nbsp;&nbsp;Please provide correct EmailId!";
             $("#error").attr("data-content", content);
             $("#error").snackbar("show");
             return false;
         }
-        var formData = "user_name=" + sessionStorage.username + "&session_id=" + sessionStorage.sessionId + "&id=" + id + "&name=" + $('#name').val() + "&email=" + $('#email').val() +
-            "&phone=" + $('#phone').val() + "&project_name=" + $('#project').val() + "&project_id=" + pid + "&status=" + $('#status').val() + "&lead_source=" + $('#agent').val() +
-            "&description=" + $('#desc').val() + "&rating=" + $('#rating').val() + "&follow_up_date=" + $('#fupdate').val() + "&lead_source_detail=" + $('#sdetail').val() +
-            "&sitevisit_date=" + $('#svdate').val();
+        var formData = "user_name=" + sessionStorage.username
+            + "&session_id=" + sessionStorage.sessionId
+            + "&id=" + id + "&name=" + $('#name').val()
+            + "&email=" + $('#email').val() +
+            "&phone=" + $('#phone').val()
+            + "&project_name=" + $('#project').val()
+            + "&project_id=" + pid + "&status=" + $('#status').val()
+            + "&lead_source=" + $('#agent').val()
+            + "&description=" + $('#desc').val()
+            + "&rating=" + $('#rating').val()
+            + "&follow_up_date=" + $('#fupdate').val()
+            + "&lead_source_detail=" + $('#sdetail').val()
+            + "&sitevisit_date=" + $('#svdate').val();
         $.ajax({
             type: "POST",
-            url: 'http://crm.primehomes.com/index.php?entryPoint=editLeadApp',
+            url: 'http://crm.primehomes.com/login.php?entryPoint=editLeadApp',
             ContentType: 'multipart/form-data',
             data: formData,
-            beforeSend: function() {
+            beforeSend: function () {
                 $(".table.detailTable tbody .save").html("Saving Data &nbsp;&nbsp;&nbsp;<i class='fa fa-spinner fa-spin' aria-hidden='true'></i>");
             },
-            success: function(response) {
+            success: function (response) {
                 var response = JSON.parse(response);
                 //alert(response.status);
                 if (response.status != 'Success') {
@@ -240,14 +249,14 @@ $(document).ready(function() {
                     $("#error").snackbar("show");
                 } else {
                     $("#success").snackbar("show");
-                    setTimeout(function() {
+                    setTimeout(function () {
                         location.reload();
                     }, 1000);
                 }
                 $(".table.detailTable tbody .save").html("Save");
 
             },
-            error: function(jqXHR, textStatus, errorThrown) {
+            error: function (jqXHR, textStatus, errorThrown) {
                 console.log(textStatus, errorThrown);
                 $("#fail").snackbar("show");
                 $(".table.detailTable tbody .save").html("Save");
@@ -256,7 +265,7 @@ $(document).ready(function() {
         });
 
     });
-    $(window).scroll(function() {
+    $(window).scroll(function () {
         var height = $(".toolbar").outerHeight();
 
         if ($(this).scrollTop() > height) {

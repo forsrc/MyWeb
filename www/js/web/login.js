@@ -1,6 +1,6 @@
 $(document).ready(function() {
     if (sessionStorage.sessionId) {
-        window.location.href = "../web/activity.html";
+        window.location.href = MY_WEB_URL.activity;
         return;
     }
 
@@ -18,13 +18,12 @@ $(document).ready(function() {
         var username = $("#username").val();
         var password = $("#password").val();
         if (username != '' && password != '') {
-            var formData = "user_name=" + username +
-                "&password=" + password +
-                "&login_request=1";
+            var formData = "user_name=" + username
+                + "&password=" + password + "&login_request=1";
             $.ajax({
                 //type: 'POST',
                 type: 'GET',
-                url: MY_WEB_URL.login,
+                url: MY_WEB_URL.loginJson,
                 ContentType: 'multipart/form-data',
                 data: formData,
                 beforeSend: function() {
@@ -41,7 +40,7 @@ $(document).ready(function() {
                         sessionStorage.sessionId = response.id;
                         sessionStorage.username = username;
                         console.log(sessionStorage.sessionId);
-                        window.location.href = "../web/activity.html";
+                        window.location.href = MY_WEB_URL.activity;
                         return;
                     }
                     $("span.error").fadeIn();
